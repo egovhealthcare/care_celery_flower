@@ -1,0 +1,25 @@
+# Add-on Flower service for a running Care stack (joins the existing `care` network).
+# Requires Care image built with care_celery_flower installed via plug_config / install_plugins.
+#
+# From care_celery_flower/:
+#   docker compose up -d
+services:
+  flower:
+    image: ghcr.io/egovhealthcare/care:latest
+    env_file:
+      - ../care/docker/.prebuilt.env
+    environment:
+      FLOWER_PORT: ${FLOWER_PORT:-5555}
+      FLOWER_BASIC_AUTH: ${FLOWER_BASIC_AUTH:-}
+      FLOWER_URL_PREFIX: ${FLOWER_URL_PREFIX:-}
+      FLOWER_UNAUTHENTICATED_API: ${FLOWER_UNAUTHENTICATED_API:-true}
+    entrypoint: ["start-flower"]
+    ports:
+      - "${FLOWER_PORT:-5555}:${FLOWER_PORT:-5555}"
+    restart: unless-stopped
+    networks:
+      - care
+
+networks:
+  care:
+    external: true

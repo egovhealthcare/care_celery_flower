@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "care_celery_flower"
+version = "1.0.0"
+description = "Celery Flower monitoring service for Care."
+readme = "README.md"
+authors = [
+  {name = "eGov Healthcare"}
+]
+maintainers = [
+  {name = "eGov Healthcare"}
+]
+license = {text = "MIT"}
+dependencies = [
+    "django",
+    "celery",
+    "djangorestframework",
+    "flower",
+    "psycopg",
+    "redis",
+]
+requires-python = ">= 3.13"
+
+[project.scripts]
+start-flower = "care_celery_flower.entrypoint:main"
+
+[project.optional-dependencies]
+test = [
+    "ruff",
+]
+
+[project.urls]
+bugs = "https://github.com/egovhealthcare/care_celery_flower/issues"
+homepage = "https://github.com/egovhealthcare/care_celery_flower"
+repository = "https://github.com/egovhealthcare/care_celery_flower"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "UP",
+]
