@@ -37,3 +37,30 @@ start-flower
 | `FLOWER_BASIC_AUTH` | _(empty)_ | `user:password` |
 | `FLOWER_URL_PREFIX` | _(empty)_ | Reverse-proxy prefix |
 | `APP_HOME` / `CARE_HOME` | auto-detected | Care project root |
+
+## Run
+
+
+```yaml
+celery-flower:
+  image: "ghcr.io/egovhealthcare/care:latest"
+  env_file:
+    - ./docker/.prebuilt.env
+  environment:
+    FLOWER_PORT: "5555"
+  entrypoint: ["start-flower"]
+  ports:
+    - "5555:5555"
+  healthcheck:
+    test: ["CMD", "curl", "-fsS", "http://localhost:5555/"]
+    interval: 10s
+    timeout: 5s
+    retries: 12
+    start_period: 20s
+  restart: unless-stopped
+  depends_on:
+    redis:
+      condition: service_started
+    celery-worker:
+      condition: service_started
+```
