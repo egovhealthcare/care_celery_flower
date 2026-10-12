@@ -147,6 +147,12 @@ def _flower_argv() -> list[str]:
         args.append(f"--basic-auth={plugin_settings.FLOWER_BASIC_AUTH}")
     if plugin_settings.FLOWER_URL_PREFIX:
         args.append(f"--url-prefix={plugin_settings.FLOWER_URL_PREFIX}")
+    if plugin_settings.FLOWER_PERSISTENT:
+        args.append("--persistent=True")
+        db_path = Path(plugin_settings.FLOWER_DB).expanduser()
+        if db_path.parent != Path("."):
+            db_path.parent.mkdir(parents=True, exist_ok=True)
+        args.append(f"--db={db_path}")
     args.extend(sys.argv[1:])
     return args
 

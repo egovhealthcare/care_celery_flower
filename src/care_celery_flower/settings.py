@@ -81,6 +81,8 @@ DEFAULTS = {
     "FLOWER_PORT": 5555,
     "FLOWER_BASIC_AUTH": "",  # format: user:password
     "FLOWER_URL_PREFIX": "",
+    "FLOWER_PERSISTENT": True,
+    "FLOWER_DB": "var/flower",  # under Care APP_HOME (gitignored via care's var/)
 }
 
 plugin_settings = PluginSettings(
