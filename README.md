@@ -13,7 +13,7 @@ Plug(
       # "FLOWER_PORT": 5555,
       # "FLOWER_BASIC_AUTH": "",  # format: user:password
       # "FLOWER_URL_PREFIX": "",
-      # "FLOWER_PERSISTENT": True,
+      # "FLOWER_PERSISTENT": False,
       # "FLOWER_DB": "var/flower",
     },
 )
@@ -38,7 +38,7 @@ start-flower
 | `FLOWER_PORT` | `5555` | Listen port |
 | `FLOWER_BASIC_AUTH` | _(empty)_ | `user:password` |
 | `FLOWER_URL_PREFIX` | _(empty)_ | Reverse-proxy prefix |
-| `FLOWER_PERSISTENT` | `True` | Persist Flower state across restarts |
+| `FLOWER_PERSISTENT` | `False` | Persist Flower state across restarts |
 | `FLOWER_DB` | `var/flower` | State DB under Care root |
 | `APP_HOME` / `CARE_HOME` | auto-detected | Care project root |
 
